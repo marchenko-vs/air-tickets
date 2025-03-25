@@ -1,0 +1,94 @@
+.order-header {
+  display: flex;
+  justify-content: center;
+}
+
+.order-header ul {
+  list-style-type: none;
+}
+
+.order-header li {
+  margin-top: 20px;
+}
+
+.order-buttons {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-big-button:hover {
+  background-color: #96b9ee;
+}
+
+.order-big-button {
+  font-family: 'Poppins', sans-serif;
+  width: 360px;
+  height: 60px;
+  text-align: center;
+  border-radius: 10px;
+  border-style: none;
+  font-size: 100%;
+  box-shadow: 0px 2px rgb(84, 84, 84);
+  background-color: #C7DDFF;
+  cursor: pointer;
+}
+
+.order-body {
+  display: block;
+}
+
+.order-container {
+  margin-top: 20px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+  width: 600px;
+  height: 140px;
+  border-radius: 25px;
+  box-shadow: 2px 2px;
+  border-width: 0;
+  padding-left: 1%;
+}
+
+.text-info {
+  width: 70%;
+  line-height: 50%;
+}
+
+.order-small-buttons {
+  width: 30%;
+  display: block;
+}
+
+.order-upper-button {
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-lower-button {
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-small-button:hover {
+  background-color: #c7aaff;
+}
+
+.order-small-button {
+  width: 100px;
+  float: right;
+  height: 30px;
+  background-color: #c7ddff;
+  font-family: "Inter", sans-serif;
+  box-shadow: 2px 2px;
+  border-width: 0;
+  border-radius: 20px;
+  cursor: pointer;
+}

@@ -1,0 +1,907 @@
+openapi: 3.0.3
+info:
+  title: Restful API for web app to buy air tickets
+  version: 1.1.0
+servers:
+  - url: https://api.airtickets.com
+paths:
+  /flights:
+    get:
+      summary: Get flights with filters
+      tags:
+        - Flights
+      operationId: findFlights
+      parameters: 
+        - name: departurePoint
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: arrivalPoint
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: departureDateTime
+          in: query
+          required: true
+          schema:
+            type: string
+            format: 2023-08-05T15:00:00:02
+      responses:
+        '200':
+          description: Successful response with a list of flights
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Flights"
+        '400':
+          description: Incorrect input data
+    post:
+      summary: Create flight
+      tags:
+        - Flights
+      operationId: createFlight
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Flight"
+      responses:
+        '200':
+          description: Successful response with created flight
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Flight"
+        '400':
+          description: Incorrect input data
+        '403':
+          description: User doesn't have access
+  /flights/{flightId}:
+    get:
+      summary: Get flight by id
+      tags:
+        - Flights
+      operationId: getFlightById
+      parameters: 
+        - name: flightId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with a flight
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Flight"
+        '401':
+          description: User is unauthorized
+        '404':
+          description: Flight is not in DB
+    patch:
+      summary: Modify flight by id
+      tags:
+        - Flights
+      operationId: changeFlightById
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Flight"
+      parameters: 
+        - name: flightId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with patched flight
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Flight"
+        '400':
+          description: Incorrect input data
+        '401':
+          description: User is unauthorized
+        '404':
+          description: Flight is not in DB
+    delete:
+      summary: Delete flight by id
+      tags:
+        - Flights
+      operationId: deleteFlightById
+      parameters: 
+        - name: flightId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Flight is deleted
+        '401':
+          description: User is unauthorized
+        '404':
+          description: Flight is not in DB          
+  /tickets:
+    post:
+      summary: Create ticket
+      tags:
+        - Tickets
+      operationId: createTicket
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ticket"
+      responses:
+        '200':
+          description: Successful response with created ticket
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tickets"
+        '400':
+          description: Incorrect input data
+        '401':
+          description: User is unauthorized
+  /flights/{flightId}/tickets:
+    get:
+      summary: Get tickets on a flight
+      tags:
+        - Tickets
+      operationId: getTicketsByFlightId
+      parameters:
+        - name: flightId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with ticket
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tickets"
+        '401':
+          description: User is unauthorized
+  /tickets/{ticketId}:
+    patch:
+      summary: Modify ticket by id
+      tags:
+        - Tickets
+      operationId: changeTicketById
+      parameters: 
+        - name: ticketId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ticket"
+      responses:
+        '200':
+          description: Successful response with modified ticket
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+        '400':
+          description: Incorrect input data
+        '401':
+          description: User is unauthorized
+        '404':
+          description: Ticket is not in DB
+    delete:
+      summary: Delete ticket by id
+      tags:
+        - Tickets
+      operationId: deleteTicketById
+      parameters: 
+        - name: ticketId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+        '401':
+          description: User is unauthorized
+        '404':
+          description: Ticket is not in DB
+  /users:
+    post:
+      summary: Create user
+      tags:
+        - Users
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        '200':
+          description: Successful response with created user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        '409':
+          description: User exists
+        '400':
+          description: Incorrect input data
+  /users/{email}:
+    get:
+      summary: Get user by id
+      tags:
+        - Users
+      operationId: getUserById
+      parameters:
+        - name: email
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        '400':
+          description: Incorrect input data
+        '404':
+          description: User is not in DB
+  /users/{userId}:
+    patch:
+      summary: Modify user by id
+      tags:
+        - Users
+      operationId: changeUserById
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      parameters: 
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with modified user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        '400':
+          description: Incorrect input data
+        '401':
+          description: User is unauthorized
+    delete:
+      summary: Delete user by id
+      tags:
+        - Users
+      operationId: deleteUserById
+      parameters: 
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /planes:
+    get:
+      summary: Get all planes
+      tags:
+        - Planes
+      operationId: getAllPlanes
+      responses:
+        '200':
+          description: Successful response with a list of planes
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Planes"
+    post:
+      summary: Create plane
+      tags:
+        - Planes
+      operationId: createPlane
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Plane"
+      responses:
+        '200':
+          description: Successful response with created plane
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Plane"
+        '204':
+          description: Plane exists
+        '400':
+          description: Incorrect input data
+        '401':
+          description: User is unauthorized
+  /planes/{planeId}:
+    get:
+      summary: Get plane by id
+      tags:
+        - Planes
+      operationId: getPlaneById
+      parameters:
+        - name: planeId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with plane
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Plane"
+        '401':
+          description: User is unauthorized
+    patch:
+      summary: Modify plane by id
+      tags:
+        - Planes
+      operationId: changePlaneById
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Plane"
+      parameters: 
+        - name: planeId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with created ticket
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Plane"
+        '400':
+          description: Incorrect input data
+        '401':
+          description: User is unauthorized
+        '404':
+          description: Plane is not in DB
+    delete:
+      summary: Delete plane by id
+      tags:
+        - Planes
+      operationId: deletePlaneById
+      parameters: 
+        - name: planeId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+        '401':
+          description: User is unauthorized
+        '404':
+          description: Plane is not in DB
+  /flights/{flightId}/planes:
+    get:
+      summary: Get plane by flightId
+      tags:
+        - Flights
+      operationId: getPlaneByFlightId
+      parameters:
+        - name: flightId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with plane
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Plane"
+        '401':
+          description: User is unauthorized
+  /services:
+    get:
+      summary: Get all services
+      tags:
+        - Services
+      operationId: getAllServices
+      responses:
+        '200':
+          description: Successful response with a list of services
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Services"
+    post:
+      summary: Create service
+      tags:
+        - Services
+      operationId: createService
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Service"
+      responses:
+        '200':
+          description: Successful response with created service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Service"
+        '204':
+          description: Service exists
+        '400':
+          description: Incorrect input data
+        '401':
+          description: User is unauthorized
+  /services/{serviceId}:
+    patch:
+      summary: Modify service by id
+      tags:
+        - Services
+      operationId: changeServiceById
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Service"
+      parameters: 
+        - name: serviceId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with modified service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Service"
+        '400':
+          description: Incorrect input data
+        '401':
+          description: User is unauthorized
+        '404':
+          description: No services added for this ticket
+    delete:
+      summary: Delete service by id
+      tags:
+        - Services
+      operationId: deleteServiceById
+      parameters: 
+        - name: serviceId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+        '401':
+          description: User is unauthorized
+        '404':
+          description: Service is not it DB
+  /tickets/{ticketId}/services:
+    get:
+      summary: Get service by ticketId
+      tags:
+        - Services
+      operationId: getServiceByTicketId
+      parameters:
+        - name: ticketId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with services
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Services"
+        '401':
+          description: User is unauthorized
+  /tickets/{ticketId}/services/{serviceId}:
+    delete:
+      summary: Delete service by ticketId
+      tags:
+        - Services
+      operationId: deleteServiceByTicketId
+      parameters: 
+        - name: ticketId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: serviceId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+        '401':
+          description: User is unauthorized
+        '404':
+          description: Service is not in DB
+  /orders/{orderId}/tickets:
+    post:
+      summary: Add ticket to order
+      tags:
+        - Tickets
+      operationId: orderTicket
+      parameters: 
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: ticketId
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with an ordered ticket
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+        '401':
+          description: User is unauthorized
+  /users/{userId}/orders:
+    get:
+      summary: Get orders history for user
+      tags:
+        - Orders
+      operationId: getOrdersHistory
+      parameters: 
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with orders
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Orders"
+        '401':
+          description: User is unauthorized
+    post:
+      summary: Create order for user
+      tags:
+        - Orders
+      operationId: createOrder
+      parameters: 
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with created order
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        '401':
+          description: User is unauthorized
+  /users/{userId}/orders/{orderId}:
+    get:
+      summary: Get current order for user
+      tags:
+        - Orders
+      operationId: getCurrentOrder
+      parameters: 
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with orders
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        '401':
+          description: User is unauthorized
+        '404':
+          description: Order hasn't been created for user yet
+  /orders/{orderId}:
+    patch:
+      summary: Modify order
+      tags:
+        - Orders
+      operationId: changeOrder
+      parameters: 
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with modified order
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        '401':
+          description: User is unauthorized
+components:
+  schemas:
+    Flight:
+      type: object
+      required:
+        - flightId
+        - planeId
+        - departurePoint
+        - arrivalPoint
+        - departureDateTime
+        - arrivalDateTime
+      properties:
+        flightId:
+          readOnly: true
+          type: integer
+          example: 34
+        planeId:
+          type: integer
+          example: 2
+        departurePoint:
+          type: string
+          example: Москва (Шереметьево)
+        arrivalPoint:
+          type: string
+          example: Санкт-Петербург (Пулково)
+        departureDateTime:
+          type: string
+          format: 2023-08-05T15:00:00:02
+          example: 2023-08-05T15:00:00:02
+        arrivalDateTime:
+          type: string
+          format: 2023-08-05T15:00:00+02
+          example: 2023-08-05T15:00:00+02
+    Flights:
+      type: array
+      items:
+        $ref: "#/components/schemas/Flight"
+    Ticket:
+      type: object
+      required:
+        - ticketId
+        - flightId
+        - row
+        - place
+        - class
+        - refund
+      properties:
+        ticketId:
+          readOnly: true
+          type: integer
+          example: 2
+        flightId:
+          type: integer
+          example: 34
+        orderId:
+          readOnly: true
+          type: integer
+          example: 5
+        row:
+          type: integer
+          example: 3
+        place:
+          type: string
+          example: B
+        class:
+          type: string
+          enum:
+            - эконом
+            - бизнес
+            - первый
+          example: бизнес
+        refund:
+          type: boolean
+          example: true
+    Tickets:
+      type: array
+      items:
+        $ref: "#/components/schemas/Ticket"
+    User:
+      type: object
+      required:
+        - userId
+        - role
+        - email
+        - password
+        - regDate
+      properties:
+        userId:
+          readOnly: true
+          type: integer
+          example: 3
+        role:
+          readOnly: true
+          type: string
+          example: клиент
+          enum:
+            - клиент
+            - модератор
+            - админ
+        email:
+          type: string
+          example: email@mail.domain
+        password:
+          writeOnly: true
+          type: string
+          example: aksdsaj3313jkj1k23h1jk3b21ji3b21b
+        firstName:
+          type: string
+          example: Vladyslav
+        lastName:
+          type: string
+          example: Marchenko
+        regDate:
+          type: string
+          readOnly: true
+          format: 2023-08-05T15:00:00:02
+          example: 2023-08-05T15:00:00:02
+    Plane:
+      type: object
+      required: 
+        - planeId
+        - manufacturer
+        - model
+        - economyClassNum
+        - businessClassNum
+        - firstClassNum
+      properties:
+        planeId:
+          type: integer
+          readOnly: true
+          example: 3
+        manufacturer:
+          type: string
+          example: Боинг
+        model:
+          type: string
+          example: 777
+        economyClassNum:
+          type: integer
+          example: 250
+        businessClassNum:
+          type: integer
+          example: 25
+        firstClassNum:
+          type: integer
+          example: 10
+    Planes:
+      type: array
+      items:
+        $ref: "#/components/schemas/Plane"
+    Service:
+      type: object
+      required: 
+        - serviceId
+        - name
+        - price
+        - economyClass
+        - businessClass
+        - firstClass
+      properties:
+        serviceId:
+          readOnly: true
+          type: integer
+          example: 3
+        name:
+          type: string
+          example: Бронирование отеля
+        price:
+          type: string
+          example: 5000
+        economyClass:
+          type: boolean
+          example: false
+        businessClass:
+          type: boolean
+          example: false
+        firstClass:
+          type: boolean
+          example: true
+    Services:
+      type: array
+      items:
+        $ref: "#/components/schemas/Service"
+    Order:
+      type: object
+      required: 
+        - orderId
+        - userId
+        - status
+      properties:
+        orderId:
+          readOnly: true
+          type: integer
+          example: 1
+        userId:
+          readOnly: true
+          type: integer
+          example: 542
+        status:
+          type: string
+          enum:
+            - создан
+            - оплачен
+          example: создан
+    Orders:
+      type: array
+      items:
+        $ref: "#/components/schemas/Order"
+    

@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #6d95f9;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  height: 70px;
+}
+
+.left-navbar, .right-navbar {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+.left-navbar img {
+  height: 50px;
+}
+
+.left-navbar {
+  padding-left: 10%;
+}
+
+.right-navbar {
+  padding-right: 10%;
+}
+
+.left-navbar li, .right-navbar li {
+  display: inline-block;
+}
+
+.left-navbar li a, .right-navbar li a {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: black;
+  text-align: left;
+  padding: 15px 15px;
+  font-size: 17px;
+}
+
+.topnav li.active {
+  background-color: #d5d5d5;
+}
+
+.topnav li:hover {
+  background-color: #d5d5d5;
+}
+
+.site-logo {
+  padding-right: 15px;
+}
+
+.container {
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+  width: 600px;
+  height: 200px;
+  border-radius: 50px;
+  box-shadow: 2px 2px;
+}
+
+.container p {
+  text-align: left;
+  height: 5px;
+  display: block;
+}
+
+.plane-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+  width: 600px;
+  height: 150px;
+  border-radius: 25px;
+  box-shadow: 2px 2px;
+  margin-top: 20px;
+}
+
+.plane-info {
+  height: 90%;
+  width: 70%;
+  margin-left: 7%;
+}
+
+.plane-info p {
+  text-align: left;
+  width: 100%;
+  line-height: 8px;
+}
+
+.plane-pic-div {
+  height: 120px;
+  margin-right: 7%;
+}
+
+.plane-pic {
+  height: 120px;
+  width: 170px;
+}
+
+.first-block {
+  padding-top: 1px;
+  margin-left: 30px;
+}
+
+.second-block {
+  margin-top: 40px;
+  margin-left: 30px;
+}
+
+.button-group {
+  display: block;
+  list-style-type: none;
+}
+
+.small-button:hover {
+  background-color: #c7aaff;
+}
+
+.small-button {
+  width: 100px;
+  float: right;
+  height: 30px;
+  background-color: #c7ddff;
+  font-family: "Inter", sans-serif;
+  box-shadow: 2px 2px;
+  border-width: 0;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.page-title {
+  display: flex;
+  justify-content: center;
+  font-family: "Inter";
+  font-weight: 100;
+}
+
+.text-box {
+  width: 360px;
+  height: 60px;
+  text-align: center;
+  border-radius: 10px;
+  border-style: none;
+  font-size: 100%;
+  box-shadow: 0px 2px rgb(84, 84, 84);
+  background-color: white;
+}
+
+.big-button:hover {
+  background-color: #96b9ee;
+}
+
+.big-button {
+  font-family: 'Poppins', sans-serif;
+  width: 360px;
+  height: 60px;
+  text-align: center;
+  border-radius: 10px;
+  border-style: none;
+  font-size: 100%;
+  box-shadow: 0px 2px rgb(84, 84, 84);
+  background-color: #C7DDFF;
+  cursor: pointer;
+}
+
+.error-message {
+  font-size: 20px;
+}
+
+.settings-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-form ul {
+  text-decoration: none;
+  list-style-type: none;
+  text-align: center;
+}
+
+.settings-form li {
+  text-decoration: none;
+  padding-top: 20px;
+}

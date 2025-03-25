@@ -1,0 +1,71 @@
+.ticket-container {
+  margin-top: 20px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+  width: 600px;
+  height: 140px;
+  border-radius: 25px;
+  box-shadow: 2px 2px;
+  border-width: 0;
+  padding-left: 1%;
+}
+
+.text-info {
+  width: 70%;
+  line-height: 50%;
+}
+
+.button-group {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.small-button {
+  width: 75%;
+  box-shadow: 0;
+}
+
+.ticket-button-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+}
+
+.ticket-small-button:hover {
+  background-color: #c7aaff;
+}
+
+.ticket-small-button {
+  width: 100px;
+  float: right;
+  height: 30px;
+  background-color: #c7ddff;
+  font-family: "Inter", sans-serif;
+  box-shadow: 2px 2px;
+  border-width: 0;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.paginate-buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paginate-buttons button {
+  border-width: 1px;
+  width: 50px;
+  height: 50px;
+}
+
+.paginate-buttons button:hover {
+  cursor: pointer;
+}

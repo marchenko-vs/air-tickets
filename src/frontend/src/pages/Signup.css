@@ -1,0 +1,15 @@
+.signup-form {
+  margin-top: 7rem;
+}
+
+.signup-form ul {
+  text-decoration: none;
+  justify-self: center;
+  list-style-type: none;
+  text-align: center;
+}
+
+.signup-form li {
+  text-decoration: none;
+  padding-top: 20px;
+}

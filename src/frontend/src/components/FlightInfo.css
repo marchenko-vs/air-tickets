@@ -1,0 +1,61 @@
+.flight-container {
+  margin-top: 20px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+  width: 600px;
+  height: 200px;
+  border-radius: 25px;
+  box-shadow: 2px 2px;
+  border-width: 0;
+}
+
+.flight-text-info {
+  width: 70%;
+}
+
+.flight-upper-text {
+  margin-top: 6%;
+}
+
+.flight-lower-text {
+  margin-top: 9%;
+}
+
+.flight-upper-text, .flight-lower-text {
+  margin-left: 7%;
+  line-height: 50%;
+}
+
+.flight-upper-text, .flight-lower-text p {
+  text-align: left;
+  display: block;
+}
+
+.flight-button-group {
+  width: 30%;
+}
+
+.flight-upper-button, .flight-lower-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+}
+
+.flight-small-button:hover {
+  background-color: #c7aaff;
+}
+
+.flight-small-button {
+  width: 100px;
+  float: right;
+  height: 30px;
+  background-color: #c7ddff;
+  font-family: "Inter", sans-serif;
+  box-shadow: 2px 2px;
+  border-width: 0;
+  border-radius: 20px;
+  cursor: pointer;
+}

@@ -1,0 +1,42 @@
+.orders-history-container {
+  margin-top: 20px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+  width: 600px;
+  height: 110px;
+  border-radius: 25px;
+  box-shadow: 2px 2px;
+  border-width: 0;
+  padding-left: 1%;
+}
+
+.orders-history-text-info {
+  width: 70%;
+  line-height: 10px;
+  padding-top: 7px;
+}
+
+.orders-history-button-div {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.orders-history-small-button:hover {
+  background-color: #c7aaff;
+}
+
+.orders-history-small-button {
+  width: 100px;
+  float: right;
+  height: 30px;
+  background-color: #c7ddff;
+  font-family: "Inter", sans-serif;
+  box-shadow: 2px 2px;
+  border-width: 0;
+  border-radius: 20px;
+  cursor: pointer;
+}

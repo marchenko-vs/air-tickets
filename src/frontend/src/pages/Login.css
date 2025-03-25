@@ -1,0 +1,15 @@
+.login-form {
+  margin-top: 7rem;
+}
+
+.login-form ul {
+  text-decoration: none;
+  justify-self: center;
+  list-style-type: none;
+  text-align: center;
+}
+
+.login-form li {
+  text-decoration: none;
+  padding-top: 20px;
+}
